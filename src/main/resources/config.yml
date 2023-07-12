@@ -1,0 +1,17 @@
+Start-Coins: 0
+# Storage-Types: config-file, sqlite, mariadb
+Storage-Type: "config-file"
+Config-File:
+  # example: "data"/"coins_config.yml", data is the path (folder) and coins_config.yml the file
+  Path: ""
+  File: "coins_config.yml"
+SQLite:
+  # example: "data"/"coins_database.db", data is the path (folder) and coins_database.db the file
+  Path: ""
+  File: "coins_database.db"
+MariaDB:
+  Host: "localhost"
+  Port: 3306
+  Database: "<your database>"
+  Username: "<your username>"
+  Password: "<your password>"

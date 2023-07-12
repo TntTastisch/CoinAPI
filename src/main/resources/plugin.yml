@@ -1,0 +1,4 @@
+name: CoinAPI
+version: '${project.version}'
+main: dev.eztxm.coinapi.CoinPlugin
+authors: [ ezTxmMC ]
