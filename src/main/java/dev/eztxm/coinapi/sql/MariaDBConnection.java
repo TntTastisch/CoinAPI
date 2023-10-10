@@ -37,22 +37,45 @@ public class MariaDBConnection {
     private void setArguments(Object[] objects, PreparedStatement preparedStatement) throws SQLException {
         for (int i = 0; i < objects.length; i++) {
             Object object = objects[i];
+
             if (object instanceof String) {
                 preparedStatement.setString(i + 1, (String) object);
-            } else if (object instanceof Integer) {
+                return;
+            }
+            
+            if (object instanceof Integer) {
                 preparedStatement.setInt(i + 1, (Integer) object);
-            } else if (object instanceof Date) {
+                return;
+            } 
+
+            if (object instanceof Date) {
                 preparedStatement.setDate(i + 1, (Date) object);
-            } else if (object instanceof Timestamp) {
+                return;
+            } 
+
+            if (object instanceof Timestamp) {
                 preparedStatement.setTimestamp(i + 1, (Timestamp) object);
-            } else if (object instanceof Boolean) {
+                return;
+            }
+            
+            if (object instanceof Boolean) {
                 preparedStatement.setBoolean(i + 1, (Boolean) object);
-            } else if (object instanceof Float) {
+                return;
+            } 
+
+            if (object instanceof Float) {
                 preparedStatement.setFloat(i + 1, (Float) object);
-            } else if (object instanceof Double) {
+                return;
+            } 
+            
+            if (object instanceof Double) {
                 preparedStatement.setDouble(i + 1, (Double) object);
-            } else if (object instanceof Long) {
+                return;
+            } 
+            
+            if (object instanceof Long) {
                 preparedStatement.setLong(i + 1, (Long) object);
+                return;
             }
         }
     }
