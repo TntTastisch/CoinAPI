@@ -17,6 +17,12 @@ public class CoinAPI {
     private final SQLiteConnection sqLiteConnection = CoinPlugin.getInstance().getSqLiteConnection();
     private final MariaDBConnection mariaDBConnection = CoinPlugin.getInstance().getMariaDBConnection();
 
+    /**
+     * Retrieves the number of coins associated with a given UUID.
+     *
+     * @param uuid The UUID of the user.
+     * @return The number of coins for the specified UUID.
+     */
     public long getCoinsByUUID(UUID uuid) {
         String uuidStr = uuid.toString();
         if (coinsConfig != null) {
@@ -48,6 +54,12 @@ public class CoinAPI {
         return 0;
     }
 
+    /**
+     * Sets the number of coins associated with a given UUID.
+     *
+     * @param uuid  The UUID of the user.
+     * @param value The new number of coins to set.
+     */
     public void setCoinsByUUID(UUID uuid, long value) {
         String uuidStr = uuid.toString();
         if (coinsConfig != null) {
@@ -68,12 +80,24 @@ public class CoinAPI {
         CoinPlugin.getInstance().getLogger().warning("All options are null");
     }
 
+    /**
+     * Adds a specified number of coins to the user's existing coins.
+     *
+     * @param uuid  The UUID of the user.
+     * @param value The number of coins to add.
+     */
     public void addCoinsByUUID(UUID uuid, long value) {
         long currentCoins = getCoinsByUUID(uuid);
         long newCoins = currentCoins + value;
         setCoinsByUUID(uuid, newCoins);
     }
 
+    /**
+     * Removes a specified number of coins from the user's existing coins.
+     *
+     * @param uuid  The UUID of the user.
+     * @param value The number of coins to remove.
+     */
     public void removeCoinsByUUID(UUID uuid, long value) {
         long currentCoins = getCoinsByUUID(uuid);
         long newCoins;

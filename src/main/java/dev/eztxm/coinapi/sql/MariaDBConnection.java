@@ -5,15 +5,6 @@ import java.sql.*;
 public class MariaDBConnection {
     private final Connection connection;
 
-    /**
-     * Initializes a new MariaDB connection with the provided connection details.
-     *
-     * @param url      The database server URL.
-     * @param port     The port number for the database server.
-     * @param database The name of the database to connect to.
-     * @param username The username for authentication.
-     * @param password The password for authentication.
-     */
     public MariaDBConnection(String url, int port, String database, String username, String password) {
         try {
             connection = DriverManager.getConnection("jdbc:mysql://" + url + ":" + port + "/" + database + "?user=" + username + "&password=" + password);
@@ -22,13 +13,6 @@ public class MariaDBConnection {
         }
     }
 
-    /**
-     * Executes a SQL query and returns a ResultSet.
-     *
-     * @param sql     The SQL query to be executed.
-     * @param objects An array of parameters to be used in the SQL query.
-     * @return A ResultSet containing the query results.
-     */
     public ResultSet query(String sql, Object... objects) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -39,12 +23,6 @@ public class MariaDBConnection {
         }
     }
 
-    /**
-     * Executes a SQL update statement.
-     *
-     * @param sql     The SQL update statement to be executed.
-     * @param objects An array of parameters to be used in the SQL statement.
-     */
     public void update(String sql, Object... objects) {
         try {
             PreparedStatement preparedStatement = connection.prepareStatement(sql);
