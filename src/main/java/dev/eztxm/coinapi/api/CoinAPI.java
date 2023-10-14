@@ -1,8 +1,8 @@
 package dev.eztxm.coinapi.api;
 
 import dev.eztxm.coinapi.CoinPlugin;
-import dev.eztxm.coinapi.sql.MariaDBConnection;
-import dev.eztxm.coinapi.sql.SQLiteConnection;
+import dev.eztxm.sql.MariaDBConnection;
+import dev.eztxm.sql.SQLiteConnection;
 import org.bukkit.configuration.file.FileConfiguration;
 
 import java.io.File;
@@ -72,10 +72,10 @@ public class CoinAPI {
             return;
         }
         if (sqLiteConnection != null) {
-            sqLiteConnection.update("UPDATE `coinapi` SET `coins`=? WHERE `uuid`=?", value, uuidStr);
+            sqLiteConnection.put("UPDATE `coinapi` SET `coins`=? WHERE `uuid`=?", value, uuidStr);
         }
         if (mariaDBConnection != null) {
-            mariaDBConnection.update("UPDATE `coinapi` SET `coins`=? WHERE `uuid`=?", value, uuidStr);
+            mariaDBConnection.put("UPDATE `coinapi` SET `coins`=? WHERE `uuid`=?", value, uuidStr);
         }
         CoinPlugin.getInstance().getLogger().warning("All options are null");
     }

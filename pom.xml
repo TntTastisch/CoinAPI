@@ -16,6 +16,13 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <distributionManagement>
+        <site>
+            <id>javadoc.eztxm.de</id>
+            <url>scp://javadoc.eztxm.de/project/</url>
+        </site>
+    </distributionManagement>
+
     <build>
         <plugins>
             <plugin>
@@ -61,6 +68,10 @@
             <id>sonatype</id>
             <url>https://oss.sonatype.org/content/groups/public/</url>
         </repository>
+        <repository>
+            <id>eztxm-repo</id>
+            <url>https://maven.eztxm.de/repo</url>
+        </repository>
     </repositories>
 
     <dependencies>
@@ -69,6 +80,11 @@
             <artifactId>spigot-api</artifactId>
             <version>1.8.8-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>dev.eztxm.sql</groupId>
+            <artifactId>SQL-API</artifactId>
+            <version>1.2.1</version>
         </dependency>
     </dependencies>
 

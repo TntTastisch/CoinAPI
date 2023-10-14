@@ -1,8 +1,8 @@
 package dev.eztxm.coinapi;
 
 import dev.eztxm.coinapi.event.JoinListener;
-import dev.eztxm.coinapi.sql.MariaDBConnection;
-import dev.eztxm.coinapi.sql.SQLiteConnection;
+import dev.eztxm.sql.MariaDBConnection;
+import dev.eztxm.sql.SQLiteConnection;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -31,13 +31,14 @@ public final class CoinPlugin extends JavaPlugin {
         switch (cfg.getString("Storage-Type").toLowerCase()) {
             case "sqlite":
                 getLogger().info("SQLite: Loading...");
-                if (cfg.getString("SQLite.Path") == null || cfg.getString("SQLite.Path").equals("")) {
+                if (cfg.getString("SQLite.Path") == null || cfg.getString("SQLite.Path").isEmpty()) {
                     sqLiteConnection = new SQLiteConnection(
+                            getDataFolder().getPath(),
                             cfg.getString("SQLite.File").endsWith(".db") ? cfg.getString("SQLite.File").substring(0, cfg.getString("SQLite.File").length() - 3) :
                                     cfg.getString("SQLite.File")
                     );
                     getLogger().info("SQLite: Loaded.");
-                    sqLiteConnection.update("CREATE TABLE IF NOT EXISTS `coinapi`(uuid VARCHAR(255), coins BIGINT(255))");
+                    sqLiteConnection.put("CREATE TABLE IF NOT EXISTS `coinapi`(uuid VARCHAR(255), coins BIGINT(255))");
                     getLogger().info("SQLite: Creating 'coinapi' table");
                     return;
                 }
@@ -54,7 +55,7 @@ public final class CoinPlugin extends JavaPlugin {
                 );
                 getLogger().info("SQLite: Loaded.");
                 getLogger().info("SQLite: Creating 'coinapi' table");
-                sqLiteConnection.update("CREATE TABLE IF NOT EXISTS `coinapi`(uuid VARCHAR(255), coins BIGINT(255))");
+                sqLiteConnection.put("CREATE TABLE IF NOT EXISTS `coinapi`(uuid VARCHAR(255), coins BIGINT(255))");
                 getLogger().info("SQLite: 'coinapi' table created");
                 break;
             case "mariadb":
@@ -68,7 +69,7 @@ public final class CoinPlugin extends JavaPlugin {
                 );
                 getLogger().info("MariaDB: Loaded.");
                 getLogger().info("MariaDB: Creating 'coinapi' table");
-                mariaDBConnection.update("CREATE TABLE IF NOT EXISTS `coinapi`(uuid VARCHAR(255), coins BIGINT(255))");
+                mariaDBConnection.put("CREATE TABLE IF NOT EXISTS `coinapi`(uuid VARCHAR(255), coins BIGINT(255))");
                 getLogger().info("MariaDB: 'coinapi' table created");
                 break;
             case "config-file":

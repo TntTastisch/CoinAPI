@@ -1,8 +1,8 @@
 package dev.eztxm.coinapi.event;
 
 import dev.eztxm.coinapi.CoinPlugin;
-import dev.eztxm.coinapi.sql.MariaDBConnection;
-import dev.eztxm.coinapi.sql.SQLiteConnection;
+import dev.eztxm.sql.MariaDBConnection;
+import dev.eztxm.sql.SQLiteConnection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
@@ -34,7 +34,7 @@ public class JoinListener implements Listener {
                 }
                 if (sqLiteConnection != null) {
                     try {
-                        sqLiteConnection.update("INSERT INTO `coinapi`(uuid,coins) VALUES (?,?)", uuidStr, startCoins);
+                        sqLiteConnection.put("INSERT INTO `coinapi`(uuid,coins) VALUES (?,?)", uuidStr, startCoins);
                         return;
                     } catch (NumberFormatException e) {
                         System.out.println(e.getMessage());
@@ -43,7 +43,7 @@ public class JoinListener implements Listener {
                 }
                 if (mariaDBConnection != null) {
                     try {
-                        mariaDBConnection.update("INSERT INTO `coinapi`(uuid,coins) VALUES (?,?)", uuidStr, startCoins);
+                        mariaDBConnection.put("INSERT INTO `coinapi`(uuid,coins) VALUES (?,?)", uuidStr, startCoins);
                         return;
                     } catch (NumberFormatException e) {
                         System.out.println(e.getMessage());
